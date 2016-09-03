@@ -1,0 +1,80 @@
+/**
+ * Code Review
+ */
+ 
+ 1. Inconsistent Formatting : 
+    The formatting is inconsistent. The number of white spaces before the start
+    of statements is more on the line numbers starting from 161 to 171 in the  
+    file Contact.java
+ 	
+ 2. Incorrect order of import statements :
+    As mentioned in Google Style Guide, the correct order of importing 
+    packages is :
+      All static imports in a single group
+      com.google imports (only if source file is in the com.google 
+                          package space)
+      Third-party imports, one group per top-level package, in ASCII sort order
+      for example: android, com, junit, org, sun
+                   java imports
+                   javax imports
+			
+   But, in the file AddressBook.java, first java package import statements are 
+   given and after that com.google import statement is given which is 
+   completely opposite. Also, a blank line must separate each group of imports  
+   which is not the case in this example.
+	
+3. Missing white space between ){ :
+   A white space is missing between closing round bracket and starting curly 
+   bracket in almost all occasions (for e.g. line number 21, 22, 34, 35 and 
+   more). A whitespace should be added in between them.
+
+4. Missing informative exception object name :
+   Exception is caught on line number 103 and 123 in AddressBook.java; but no 
+   comments or a informative object name of Exception is used denoting why 
+   false was returned when exception was caught or what are possible reasons for 
+   the exception. Exception object is named as "e" in both cases which is pretty 
+   generic and provides no extra information. So, it should be replaced by 
+   something more informative.
+
+5. remove() method in AddressBook.java can be done with less verbosity :
+   The remove() method in AddressBook.java makes use of variables like 
+   "indexOfElementToBeRemoved" which is not at all required. Instead of setting 
+   the flag when a matching contact in found, the contact should be removed 
+   directly at that place. This will save at least 6-7 lines of code and 
+   additionally will make code more readable and less space will be used as no 
+   variable will be required for flag.
+
+6. Casting of object and then checking whether two objects are of same class
+   In the equals() method in Contact.java, the object is first casted to 
+   Contact and later checked whether that object is of type Contact (line 
+   number 161 and 166). But this is not useful and doesn't provides any 
+   conclusion about class of the object. So, the class of the object should 
+   be compared before casting it to Contact.
+   
+7. toString() method not overridden :
+   toString() method is not overridden in both, AddressBook.java and 
+   Contact.java. The method should be overridden with proper format to make 
+   class more practical and pleasant to use
+
+8. @throws not used in JavaDocs :
+   @throws isn't used in JavaDocs in the methods setPhoneNumber(), 
+   setEmailAddress(), setNotes() in the Contact.java file. The corresponding 
+   throw operations should be reported in JavaDocs for the above methods.
+   
+9. Inconsistent method names :
+   The method names in AddressBook.java are inconsistent and all methods don't  
+   follow same schema which makes them confusing.
+   For e.g, adding a contact in Address Book has a method called add() and for  
+   importing contacts there is a method called importContact(). So, it would 
+   have been better if both would have been named as either addContact() and  
+   importContact() or add() and import() to make them consistent.
+   
+10. Better to use interface as return type than concrete object 
+    (AddressBook.java, line #61) :
+    Its better to use return type as List<Contact> than ArrayList<Contact> as 
+    it doesn't ties the code with API so that future changes aren't difficult. 
+    So, for e.g., if current return type is ArrayList<Contact>, and in future, 
+    for some reason if it needs to be changed to LinkedList<Contact>, all the 
+    existing users of API may have to to change their implementations.
+    Instead, if List<Contact> was used, changes can be made swiftly without 
+    affecting API users.

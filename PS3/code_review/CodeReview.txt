@@ -1,0 +1,47 @@
+/**
+  * Code Review
+  */
+
+ 1. Use of synchronized variable on methods :
+    The implementation makes use of synchronized variable on the method itself.
+    This may cause the program to work inefficiently as the program will be
+    synchronizing even those parts of the data which aren't actually shared. So,
+    the method-wide use of synchronization should be avoided and it should only be used
+    on the data which is actually shared among multiple methods.
+
+ 2. Improper formatting :
+    The code is not formatted properly. On multiple occasions(e.g. line #9, #24, etc. in
+    the file StopwatchCreator.java), the number of characters on a single line exceeds the
+    preferred length of 80.
+
+ 3. Incorrect use of equals()
+    The equals method is basically comparing two stopwatch IDs and returning true if the
+    two stopwatch IDs are same. But, the only scenario when two stopwatch IDs will be same
+    is when both the stopwatches reference to same stopwatch. So basically, the equals method
+    is just checking whether both the stopwatch instances are referring to same stopwatch.
+    But, as mentioned in Effective Java, equals shouldn't be used to check whether the two
+    objects refer to the same object; which is done here.
+
+ 4. Incorrect order of importing:
+    In StopwatchFactory.java, edu.nyu.pqs.stopwatch.api.Stopwatch should have been imported
+    before other java files.
+
+ 5. Didn't add @Override and {@inheritDoc}
+    Multiple methods in StopwatchCreator.java override methods mentioned in the API. So,
+    @Override should have been mentioned on such methods. Additionally, {@inheritDoc}
+    should have been used for the overridden methods to inherit Javadocs.
+
+6.  No messages when Exception is thrown
+    In StopwatchFactory.java, getStopwatch() throws an exception when the ID is empty or
+    null or if the ID already exists. But, it doesn't provides meaningful message along
+    with the exception. For e.g. in case when ID already exists, instead of just throwing
+    IllegalArgumentException(); IllegalArgumentException("ID already exists") could have been
+    used which would have helped the client to identify the exact problem. Same holds true 
+    in case of IllegalStateException();
+    
+7.  getLapTimes() (Line #107 - #112)
+    No need to create a lap when lap times are requested when stopwatch is still running.
+    
+8.  SuppressWarnings
+    SuppressWarnings is used but nothing is mentioned why it was used. Also, its better to
+    avoid warnings than to suppress them.    
