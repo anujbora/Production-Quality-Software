@@ -100,6 +100,7 @@ public class AddressBook {
       	gson.toJson(c, writer);
         writer.write("\n");
       }
+      writer.close();
     } catch (IOException FileAccessFailed) {
       return false;
     }
